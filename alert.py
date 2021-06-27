@@ -23,6 +23,7 @@ set_price = 1000
 
 def initialInfo():
     print("hey .. welcome .. ")
+    printBot(" Sent from cloud shell")
     printBot(" Starting alert tracking")
     printBot(" Current Set Price - " + str(set_price))
     printBot(" Current Set URL - " + URL)
@@ -46,9 +47,7 @@ def check_price():
     title = soup.find(id='productTitle').get_text()
     product_title = str(title)
     product_title = product_title.strip()
-    printBot(product_title)
     price = soup.find(id='priceblock_ourprice').get_text()
-    # print(price)
     product_price = ''
     for letters in price:
         if letters.isnumeric() or letters == '.':
@@ -58,8 +57,6 @@ def check_price():
         alert_system(product_title, URL)
         printBot('sent')
         return
-    else:
-        print('not sent')
     Timer(60, check_price).start()
 
 
