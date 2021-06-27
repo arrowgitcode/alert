@@ -16,14 +16,27 @@ headers = {
 
 API_TOKEN = '1710137552:AAFKwuj96c6U7rZJCfWg2s3HqfpFJ9JLjQk'
 ID = -1001566112738
-bot = telebot.TeleBot(API_TOKEN)
+
 
 set_price = 1000
 
 
+def initialInfo():
+    printBot(" Starting alert tracking")
+    printBot(" Current Set Price - " + str(set_price))
+    printBot(" Current Set URL - " + URL)
+
+
 def alert_system(product, link):
+    bot = telebot.TeleBot(API_TOKEN)
     message = " Product :: " + product + " ,Link :: " + link
     bot.send_message(chat_id=ID, text=message)
+
+
+def printBot(message):
+    bot = telebot.TeleBot(API_TOKEN)
+    bot.send_message(chat_id=ID, text=message)
+
 
 def check_price():
     page = requests.get(URL, headers=headers)
@@ -32,7 +45,7 @@ def check_price():
     title = soup.find(id='productTitle').get_text()
     product_title = str(title)
     product_title = product_title.strip()
-    print(product_title)
+    printBot(product_title)
     price = soup.find(id='priceblock_ourprice').get_text()
     # print(price)
     product_price = ''
@@ -42,11 +55,16 @@ def check_price():
     print(float(product_price))
     if float(product_price) <= set_price:
         alert_system(product_title, URL)
-        print('sent')
+        printBot('sent')
         return
     else:
         print('not sent')
     Timer(60, check_price).start()
 
 
-check_price()
+def driverFunction():
+  initialInfo()
+  check_price()
+
+
+driverFunction()
