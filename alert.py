@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-from email_alert import alert_system
 from threading import Timer
-
+import telebot
 URL = "https://www.amazon.in/Rockerz-255-Pro-Technology-Resistance/dp/B082VS5H3Y/ref=sr_1_16?crid=6YV5W3Q3TW8F&dchild=1&keywords=bluthoothearphone&qid=1612370071&sprefix=blu%2Caps%2C298&sr=8-16"
 
 headers = {
@@ -14,8 +13,17 @@ headers = {
     'Connection': 'close'
 }
 
+
+API_TOKEN = '1710137552:AAFKwuj96c6U7rZJCfWg2s3HqfpFJ9JLjQk'
+ID = -1001566112738
+bot = telebot.TeleBot(API_TOKEN)
+
 set_price = 1000
 
+
+def alert_system(product, link):
+    message = " Product :: " + product + " ,Link :: " + link
+    bot.send_message(chat_id=ID, text=message)
 
 def check_price():
     page = requests.get(URL, headers=headers)
