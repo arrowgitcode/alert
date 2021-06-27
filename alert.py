@@ -22,6 +22,7 @@ set_price = 1000
 
 
 def initialInfo():
+    print("hey .. welcome .. ")
     printBot(" Starting alert tracking")
     printBot(" Current Set Price - " + str(set_price))
     printBot(" Current Set URL - " + URL)
