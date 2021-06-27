@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup4
 from threading import Timer
 import telebot
 URL = "https://www.amazon.in/Rockerz-255-Pro-Technology-Resistance/dp/B082VS5H3Y/ref=sr_1_16?crid=6YV5W3Q3TW8F&dchild=1&keywords=bluthoothearphone&qid=1612370071&sprefix=blu%2Caps%2C298&sr=8-16"
